@@ -22,23 +22,16 @@ public class BaseSettings {
         driver.get(URL);
     }
 
-//    @BeforeEach
-//     void start() {
-//        driver.get(URL);
-//    }
 
-
-
-
-//    @AfterEach
-//     void preOver() {
-//        try {
-//            Thread.sleep(3000);
-//        } catch (InterruptedException e) {
-//            throw new RuntimeException(e);
-//        }
-//        driver.close();
-//    }
+    @AfterEach
+     void preOver() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        driver.close();
+    }
 
     @AfterEach
     void over() {

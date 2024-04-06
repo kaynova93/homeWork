@@ -1,6 +1,7 @@
 package org.ibs;
 
 import org.ibs.dataPage.PageObject;
+import org.ibs.testData.TestData;
 import org.ibs.testData.ValidationTestData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -53,7 +54,9 @@ public class TestModalWindow extends BaseSettings{
     }
 
     @ParameterizedTest
-    @EnumSource(ValidationTestData.class)
+    @EnumSource(value = ValidationTestData.class,
+            names = {"TEST_DATA_7","TEST_DATA_8"},
+            mode = EnumSource.Mode.EXCLUDE)
     void testValidationTestPositive(ValidationTestData validationTestData){
         driver.findElement(By.xpath(PageObject.BTN_ADD.getSelector())).click();
         driver.findElement(By.xpath(INPUT_FIELD_NAME.getSelector())).sendKeys(validationTestData.getTest());

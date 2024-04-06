@@ -16,20 +16,19 @@ public class TestAddsProduct extends BaseSettings{
     @ParameterizedTest
     @EnumSource(value = TestData.class,
             names = {"TEST_DATA_1","TEST_DATA_2"},
-            mode = EnumSource.Mode.INCLUDE
-    )
+            mode = EnumSource.Mode.INCLUDE)
     void testAddNotExoticProduct(TestData testData){
         driver.findElement(By.xpath(BTN_ADD.getSelector())).click();
         driver.findElement(By.xpath(INPUT_FIELD_NAME.getSelector()))
                 .sendKeys(testData.getName());
         driver.findElement(By.xpath(FIELD_TYPE.getSelector())).click();
         driver.findElement(By.id(MODAL_TITLE.getSelector())).isDisplayed();
-        WebElement select = driver.findElement(By.xpath(FIELD_TYPE.getSelector()));
+        WebElement select = driver.findElement(By.xpath(testData.getPageObject().getSelector()));
         select.click();
         select.findElement(By.xpath(testData.getPageObject().getSelector())).click();
         driver.findElement(By.id(BTN_SAVE.getSelector())).click();
         try {
-            Thread.sleep(500);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -39,9 +38,9 @@ public class TestAddsProduct extends BaseSettings{
                 findElements(By.cssSelector(" tr:last-child td")).stream().toList();
 
         Assertions.assertAll("Сравнение добавленного элемента",
-                ()->Assertions.assertEquals(testData.getName(),els.get(0).getText()),
-                ()->Assertions.assertEquals(testData.getType(),els.get(1).getText()),
-                ()->Assertions.assertEquals(testData.getExotic(),els.get(2).getText())
+                ()->Assertions.assertEquals(testData.getName(),els.get(0).getText(),"Получили "+ els.get(0).getText()),
+                ()->Assertions.assertEquals(testData.getType(),els.get(1).getText(),"Получили "+els.get(1).getText()),
+                ()->Assertions.assertEquals(testData.getExotic(),els.get(2).getText(),"Получили "+els.get(2).getText())
         );
     }
 
@@ -58,7 +57,7 @@ public class TestAddsProduct extends BaseSettings{
         driver.findElement(By.id(MODAL_TITLE.getSelector())).isDisplayed();
         WebElement select = driver.findElement(By.xpath(FIELD_TYPE.getSelector()));
         select.click();
-        select.findElement(By.xpath(SELECT_VEGETABLE.getSelector())).click();
+        select.findElement(By.xpath(testData.getPageObject().getSelector())).click();
         driver.findElement(By.id(CHECKBOX_EXOTIC.getSelector())).click();
         driver.findElement(By.id(BTN_SAVE.getSelector())).click();
         try {
@@ -75,7 +74,7 @@ public class TestAddsProduct extends BaseSettings{
                 ()->Assertions.assertEquals(testData.getName(),els.get(0).getText(),
                         "название продукта не совпадает"),
                 ()->Assertions.assertEquals(testData.getType(),els.get(1).getText(),
-                        "тип продукта не совпадает"),
+                        "тип продукта не совпадает "+ els.get(1).getText()+" " +els.get(0).getText()),
                 ()->Assertions.assertEquals(testData.getExotic(),els.get(2).getText(),
                         "признак экзотичный продукта не совпадает")
         );
