@@ -9,9 +9,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import java.util.List;
 
-import static org.ibs.dataPage.PageObject.*;
+import static org.ibs.dataPage.PageElements.*;
 
-public class TestAddsProduct extends BaseSettings{
+public class TestAddsProduct extends BaseTests {
 
     @ParameterizedTest
     @EnumSource(value = TestData.class,

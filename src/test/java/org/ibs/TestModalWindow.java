@@ -1,7 +1,6 @@
 package org.ibs;
 
-import org.ibs.dataPage.PageObject;
-import org.ibs.testData.TestData;
+import org.ibs.dataPage.PageElements;
 import org.ibs.testData.ValidationTestData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -12,10 +11,10 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static org.ibs.dataPage.PageObject.*;
+import static org.ibs.dataPage.PageElements.*;
 import static org.ibs.testData.ValidationTestData.*;
 
-public class TestModalWindow extends BaseSettings{
+public class TestModalWindow extends BaseTests {
 
     @Test
     void testElementsInModal(){
@@ -58,7 +57,7 @@ public class TestModalWindow extends BaseSettings{
             names = {"TEST_DATA_7","TEST_DATA_8"},
             mode = EnumSource.Mode.EXCLUDE)
     void testValidationTestPositive(ValidationTestData validationTestData){
-        driver.findElement(By.xpath(PageObject.BTN_ADD.getSelector())).click();
+        driver.findElement(By.xpath(PageElements.BTN_ADD.getSelector())).click();
         driver.findElement(By.xpath(INPUT_FIELD_NAME.getSelector())).sendKeys(validationTestData.getTest());
         driver.findElement(By.id(BTN_SAVE.getSelector())).click();
         try {

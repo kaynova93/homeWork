@@ -1,6 +1,6 @@
 package org.ibs.dataPage;
 
-public enum PageObject {
+public enum PageElements {
     BTN_ADD("//button[@data-target = '#editModal']"),
     FIELD_TYPE("//select"),
     SELECT_FRUIT("//option[@value='FRUIT']"),
@@ -16,7 +16,7 @@ public enum PageObject {
 
     private String selector ;
 
-    PageObject(String selector) {
+    PageElements(String selector) {
         this.selector = selector;
     }
 

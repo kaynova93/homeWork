@@ -1,25 +1,25 @@
 package org.ibs.testData;
 
-import org.ibs.dataPage.PageObject;
+import org.ibs.dataPage.PageElements;
 
 public enum TestData {
-    TEST_DATA_1("Груша", "Фрукт", "false", PageObject.SELECT_FRUIT),
-    TEST_DATA_2("Свекла", "Овощ", "false", PageObject.SELECT_VEGETABLE),
-    TEST_DATA_3("Синяя кукуруза", "Овощ", "true",PageObject.SELECT_VEGETABLE),
-    TEST_DATA_4("Гуава", "Фрукт", "true",PageObject.SELECT_FRUIT);
+    TEST_DATA_1("Груша", "Фрукт", "false", PageElements.SELECT_FRUIT),
+    TEST_DATA_2("Свекла", "Овощ", "false", PageElements.SELECT_VEGETABLE),
+    TEST_DATA_3("Синяя кукуруза", "Овощ", "true", PageElements.SELECT_VEGETABLE),
+    TEST_DATA_4("Гуава", "Фрукт", "true", PageElements.SELECT_FRUIT);
 
 
     private String name;
     private String type;
     private String exotic;
 
-    private PageObject pageObject;
+    private PageElements pageElements;
 
-    TestData(String name, String type, String exotic,PageObject pageObject) {
+    TestData(String name, String type, String exotic, PageElements pageElements) {
         this.name = name;
         this.type = type;
         this.exotic = exotic;
-        this.pageObject = pageObject;
+        this.pageElements = pageElements;
     }
 
     public String getName() {
@@ -34,7 +34,7 @@ public enum TestData {
         return exotic;
     }
 
-    public PageObject getPageObject() {
-        return pageObject;
+    public PageElements getPageObject() {
+        return pageElements;
     }
 }

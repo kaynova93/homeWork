@@ -1,7 +1,6 @@
 package org.ibs;
 
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -9,7 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
-public class BaseSettings {
+public class BaseTests {
     private static final String URL = "http://localhost:8080/food";
     static WebDriver driver;
     @BeforeEach
