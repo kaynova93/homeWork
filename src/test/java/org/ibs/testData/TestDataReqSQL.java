@@ -1,6 +1,6 @@
 package org.ibs.testData;
 
-public class TestDataDB {
+public class TestDataReqSQL {
 
     public static final String allTable = "SELECT * FROM FOOD;";
 

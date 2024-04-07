@@ -1,8 +1,6 @@
-package org.ibs.testDB;
+package org.ibs.testData;
 
-import org.ibs.dataPage.PageElements;
-
-public enum TestData {
+public enum TestDataSQL {
     TEST_DATA_1("Груша", "Фрукт", 0),
     TEST_DATA_2("Свекла", "Овощ", 0),
     TEST_DATA_3("Синяя кукуруза", "Овощ", 1),
@@ -14,7 +12,7 @@ public enum TestData {
     private String type;
     private int exotic;
 
-    TestData(String name, String type, int exotic) {
+    TestDataSQL(String name, String type, int exotic) {
         this.name = name;
         this.type = type;
         this.exotic = exotic;

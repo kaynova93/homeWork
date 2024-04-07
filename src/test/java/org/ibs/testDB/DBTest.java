@@ -1,20 +1,21 @@
 package org.ibs.testDB;
 
+import org.ibs.testData.TestDataSQL;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import java.sql.*;
 import static org.ibs.testDB.BaseTestSQL.*;
-import static org.ibs.testDB.TestData.TEST_DATA_1;
-import static org.ibs.testData.TestDataDB.*;
+import static org.ibs.testData.TestDataSQL.TEST_DATA_1;
+import static org.ibs.testData.TestDataReqSQL.*;
 
 public class DBTest {
 
 
     @ParameterizedTest
-    @EnumSource(TestData.class)
-    public void insetProduct(TestData testData ) throws SQLException {
+    @EnumSource(TestDataSQL.class)
+    public void insetProduct(TestDataSQL testData ) throws SQLException {
         Connection connection = initDB();
         PreparedStatement insert =
                 connection.prepareStatement(insertProduct);
