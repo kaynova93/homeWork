@@ -1,7 +1,8 @@
-package org.ibs;
+package org.ibs.testUI;
 
 
 import org.ibs.testData.TestData;
+import org.ibs.testUI.BaseTests;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;

@@ -1,7 +1,8 @@
-package org.ibs;
+package org.ibs.testUI;
 
 import org.ibs.dataPage.PageElements;
 import org.ibs.testData.ValidationTestData;
+import org.ibs.testUI.BaseTests;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

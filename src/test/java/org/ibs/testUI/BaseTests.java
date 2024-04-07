@@ -1,4 +1,4 @@
-package org.ibs;
+package org.ibs.testUI;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

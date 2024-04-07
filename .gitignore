@@ -8,9 +8,16 @@ target/
 .idea/jarRepositories.xml
 .idea/compiler.xml
 .idea/libraries/
+.allure
 *.iws
 *.iml
 *.ipr
+
+# File ignoring
+*.iml
+*.war
+*.jar
+*.log
 
 ### Eclipse ###
 .apt_generated
