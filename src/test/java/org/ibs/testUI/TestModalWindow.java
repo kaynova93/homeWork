@@ -1,77 +1,69 @@
 package org.ibs.testUI;
 
-import org.ibs.dataPage.PageElements;
+import org.ibs.dataPage.PageElement;
 import org.ibs.testData.ValidationTestData;
-import org.ibs.testUI.BaseTests;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-
 import java.util.List;
-
-import static org.ibs.dataPage.PageElements.*;
 import static org.ibs.testData.ValidationTestData.*;
 
 public class TestModalWindow extends BaseTests {
+    PageElement pageElement = new PageElement();
 
     @Test
-    void testElementsInModal(){
-        driver.findElement(By.xpath(BTN_ADD.getSelector())).click();
+    void testElementsInModal() {
+        pageElement.init(driver);
+        pageElement.getBtnAdd().click();
 
         Assertions.assertAll(
-                ()->Assertions.assertEquals("Добавление товара",
-                        driver.findElement(By.id( MODAL_TITLE.getSelector())).getAttribute("innerText"),
+                () -> Assertions.assertEquals("Добавление товара",
+                        pageElement.getModalTitle().getAttribute("innerText"),
                         "не совпал текст у заголовка"),
-                ()-> Assertions.assertEquals("Наименование",
-                        driver.findElement(By.xpath(TITLE_FIELD_NAME.getSelector())).getAttribute("innerText"),
+                () -> Assertions.assertEquals("Наименование",
+                        pageElement.getTitleFieldName().getAttribute("innerText"),
                         "не совпал текст у поля "),
-                ()-> Assertions.assertEquals("Тип",
-                        driver.findElement(By.xpath(TITLE_FIELD_TYPE.getSelector())).getAttribute("innerText"),
+                () -> Assertions.assertEquals("Тип",
+                        pageElement.getTitleFieldType().getAttribute("innerText"),
 
                         "не совпал текст у поля "),
-                ()-> Assertions.assertEquals("Экзотический",
-                        driver.findElement(By.xpath(TITLE_FIELD_EXOTIC.getSelector())).getAttribute("innerText"),
+                () -> Assertions.assertEquals("Экзотический",
+                        pageElement.getTitleFieldExotic().getAttribute("innerText"),
                         "не совпал текст у поля "),
-                ()-> Assertions.assertEquals("Сохранить",
-                        driver.findElement(By.id(BTN_SAVE.getSelector())).getAttribute("innerText"),
+                () -> Assertions.assertEquals("Сохранить",
+                        pageElement.getBtnSave().getAttribute("innerText"),
                         "не совпал текст у поля ")
         );
     }
 
     @Test
-    void testTypeList(){
-       driver.findElement(By.xpath(BTN_ADD.getSelector())).click();
-       driver.findElement(By.xpath(FIELD_TYPE.getSelector())).click();
-       WebElement fruit= driver.findElement(By.xpath(SELECT_FRUIT.getSelector()));
-       WebElement vegetable = driver.findElement(By.xpath(SELECT_VEGETABLE.getSelector()));
-       Assertions.assertTrue(fruit.isDisplayed());
-       Assertions.assertTrue(vegetable.isDisplayed());
-       Assertions.assertEquals(TEST_DATA_8.getTest(),fruit.getText(), "получили текст : "+ fruit.getText());
-       Assertions.assertEquals(TEST_DATA_7.getTest(),vegetable.getText(), "получили текст : "+ vegetable.getText());
+    void testTypeList() {
+        pageElement.init(driver);
+        pageElement.getBtnAdd().click();
+        pageElement.getFieldType().click();
+        Assertions.assertTrue(pageElement.getSelectFruit().isDisplayed());
+        Assertions.assertTrue(pageElement.getSelectVegetable().isDisplayed());
+        Assertions.assertEquals(TEST_DATA_8.getTest(), pageElement.getSelectFruit().getText(),
+                "получили текст : " + pageElement.getSelectFruit().getText());
+        Assertions.assertEquals(TEST_DATA_7.getTest(), pageElement.getSelectVegetable().getText(),
+                "получили текст : " + pageElement.getSelectVegetable().getText());
     }
 
     @ParameterizedTest
     @EnumSource(value = ValidationTestData.class,
-            names = {"TEST_DATA_7","TEST_DATA_8"},
+            names = {"TEST_DATA_7", "TEST_DATA_8"},
             mode = EnumSource.Mode.EXCLUDE)
-    void testValidationTestPositive(ValidationTestData validationTestData){
-        driver.findElement(By.xpath(PageElements.BTN_ADD.getSelector())).click();
-        driver.findElement(By.xpath(INPUT_FIELD_NAME.getSelector())).sendKeys(validationTestData.getTest());
-        driver.findElement(By.id(BTN_SAVE.getSelector())).click();
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+    void testValidationTestPositive(ValidationTestData validationTestData) {
+        pageElement.init(driver);
 
-        List<WebElement> els = driver.
-                findElement(By.tagName("tbody")).
-                findElements(By.cssSelector(" tr:last-child td")).stream().toList();
+        pageElement.getBtnAdd().click();
+        pageElement.getInputFieldName().sendKeys(validationTestData.getTest());
+        pageElement.getBtnSave().click();
+        List<WebElement> result = pageElement.getResultAddProduct(driver);
 
-        Assertions.assertEquals(validationTestData.getTest(),els.get(0).getText(),
-                        "название продукта не совпадает");
+        Assertions.assertEquals(validationTestData.getTest(), result.get(0).getText(),
+                "название продукта не совпадает");
     }
 }

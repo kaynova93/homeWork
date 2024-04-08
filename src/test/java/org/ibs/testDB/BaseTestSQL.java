@@ -9,6 +9,7 @@ import java.sql.SQLException;
 
 public class BaseTestSQL {
     static Connection connection;
+
     @BeforeAll
     static Connection initDB() throws SQLException {
         connection = DriverManager
@@ -16,6 +17,7 @@ public class BaseTestSQL {
                         "user", "pass");
         return connection;
     }
+
     @AfterAll
     static void close() throws SQLException {
         connection.close();

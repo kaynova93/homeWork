@@ -10,9 +10,7 @@ public enum ValidationTestData {
     TEST_DATA_7("Овощ"),
     TEST_DATA_8("Фрукт");
 
-
-     String test;
-
+    String test;
 
     ValidationTestData(String test) {
         this.test = test;
