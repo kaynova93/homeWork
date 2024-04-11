@@ -1,34 +1,56 @@
 package org.ibs.dataPage;
 
-import org.ibs.testData.TestData;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
-public class PageElement {
+public class PageObject {
+
+    private static final String URL = "http://localhost:8080/food";
+    public static WebDriver driver;
+
+//    public PageObject(WebDriver driver) {
+//        PageFactory.initElements(driver, this);
+//    }
 
     @FindBy(xpath = "//button[@data-target = '#editModal']")
+    @CacheLookup
     private WebElement btnAdd;
 
     @FindBy(xpath = "//select")
+    @CacheLookup
     private WebElement fieldType;
     @FindBy(xpath = "//option[@value='FRUIT']")
+    @CacheLookup
     private WebElement selectFruit;
     @FindBy(xpath = "//option[@value='VEGETABLE']")
+    @CacheLookup
     private WebElement selectVegetable;
     @FindBy(id = "editModalLabel")
+    @CacheLookup
     private WebElement modalTitle;
     @FindBy(id = "save")
+    @CacheLookup
     private WebElement btnSave;
 
     @FindBy(xpath = "//input[@class='form-control']")
+    @CacheLookup
     private WebElement inputFieldName;
 
     @FindBy(id = "exotic")
+    @CacheLookup
     private WebElement checkboxExotic;
 
     @FindBy(xpath = "//label[.='Наименование']")
@@ -84,15 +106,30 @@ public class PageElement {
         return inputFieldName;
     }
 
-    public void init(final WebDriver driver) {
+    public void init() {
+        driver = new ChromeDriver();
+        System.setProperty("webdriver.chromedriver.driver", "src/test/resources/chromedriver.exe");
+        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+        driver.get(URL);
         PageFactory.initElements(driver, this);
     }
 
-    public WebElement getType(TestData testData){
-        return testData.getType().equals("Фрукт")? selectFruit : selectVegetable;
+    public void close() {
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        driver.close();
     }
 
-    public List<WebElement> getResultAddProduct(final WebDriver driver){
+    public WebElement getType(String type) {
+        return type.equals("Фрукт") ? selectFruit : selectVegetable;
+    }
+
+    public List<WebElement> getResultAddProduct() {
         try {
             Thread.sleep(500);
         } catch (InterruptedException e) {
@@ -102,5 +139,6 @@ public class PageElement {
                 findElement(By.tagName("tbody")).
                 findElements(By.cssSelector(" tr:last-child td")).stream().toList();
     }
+
 
 }
