@@ -15,6 +15,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 public class PageObject {
 
@@ -137,7 +138,7 @@ public class PageObject {
         }
         return driver.
                 findElement(By.tagName("tbody")).
-                findElements(By.cssSelector(" tr:last-child td")).stream().toList();
+                findElements(By.cssSelector(" tr:last-child td")).stream().collect(Collectors.toList());
     }
 
 
