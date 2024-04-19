@@ -27,12 +27,6 @@ public class PageObject {
     public static WebDriver driver;
 
 
-
-//    public PageObject(WebDriver driver) {
-//        PageFactory.initElements(driver, this);
-//    }
-
-
     @FindBy(xpath = "//button[@data-target = '#editModal']")
     @CacheLookup
     private WebElement btnAdd;
@@ -118,7 +112,8 @@ public class PageObject {
 
 
     public void init() {
-        if (propertyMap.get("type.driver").equalsIgnoreCase("remote")){
+        System.out.println(System.getProperty("app.type.driver"));
+        if (System.getProperty("app.type.driver").equalsIgnoreCase("remote")){
             initRemoteDriver();
         }else{
         driver = new ChromeDriver();
@@ -134,16 +129,17 @@ public class PageObject {
 
     private void initRemoteDriver(){
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-        desiredCapabilities.setBrowserName(propertyMap.get("type.browser"));
-        desiredCapabilities.setVersion(propertyMap.get("type.version"));
-        desiredCapabilities.setCapability("selenoid:options",
-                Map.<String,Object>of("enableVNC", true));
+        desiredCapabilities.setBrowserName(System.getProperty("app.type.browser"));
+        desiredCapabilities.setVersion(System.getProperty("app.type.version"));
+//        desiredCapabilities.setCapability("selenoid:options",
+//                Map.<String,Object>of("enableVNC", true
+//                ));
 
 //        desiredCapabilities.setCapability("enableVideo", false);
 
         try {
             driver = new RemoteWebDriver(URI.create("http://149.154.71.152:4444/wd/hub").toURL(),desiredCapabilities);
-//            driver = new RemoteWebDriver(URI.create(propertyMap.get("selenoid.url")).toURL(),desiredCapabilities);
+//            driver = new RemoteWebDriver(URI.create(app.propertyMap.get("selenoid.url")).toURL(),desiredCapabilities);
 //
             driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
             driver.manage().window().maximize();
