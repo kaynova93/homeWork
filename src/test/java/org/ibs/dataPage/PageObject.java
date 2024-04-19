@@ -1,5 +1,6 @@
 package org.ibs.dataPage;
 
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -14,6 +15,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -21,6 +23,8 @@ public class PageObject {
 
     private static final String URL = "http://localhost:8080/food";
     public static WebDriver driver;
+
+
 
 //    public PageObject(WebDriver driver) {
 //        PageFactory.initElements(driver, this);
@@ -108,6 +112,9 @@ public class PageObject {
     }
 
     public void init() {
+//        if("remote".equalsIgnoreCase(System.getProperty("type.driver"))){
+//            initRemoteDriver();
+//        }
         driver = new ChromeDriver();
         System.setProperty("webdriver.chromedriver.driver", "src/test/resources/chromedriver.exe");
         driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
@@ -116,6 +123,19 @@ public class PageObject {
         driver.get(URL);
         PageFactory.initElements(driver, this);
     }
+
+//    @Test
+//    public void test(){
+//        System.out.println(System.getProperty("type.driver"));
+//    }
+
+
+    private void initRemoteDriver(){
+        System.out.println("bybn");
+
+    }
+
+
 
     public void close() {
         try {
