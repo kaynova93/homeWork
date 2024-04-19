@@ -1,27 +1,29 @@
 package org.ibs.dataPage;
 
-import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
+import java.net.MalformedURLException;
+import java.net.URI;
+
 import java.util.List;
-import java.util.Properties;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+import static org.ibs.properties.PropManedger.propertyMap;
+
 public class PageObject {
 
-    private static final String URL = "http://localhost:8080/food";
+    private static final String URL_LOCAL = "http://localhost:8080/food";
+    private static final String URL = "http://149.154.71.152:8080/";
     public static WebDriver driver;
 
 
@@ -30,9 +32,11 @@ public class PageObject {
 //        PageFactory.initElements(driver, this);
 //    }
 
+
     @FindBy(xpath = "//button[@data-target = '#editModal']")
     @CacheLookup
     private WebElement btnAdd;
+
 
     @FindBy(xpath = "//select")
     @CacheLookup
@@ -111,27 +115,44 @@ public class PageObject {
         return inputFieldName;
     }
 
+
+
     public void init() {
-//        if("remote".equalsIgnoreCase(System.getProperty("type.driver"))){
-//            initRemoteDriver();
-//        }
+        if (propertyMap.get("type.driver").equalsIgnoreCase("remote")){
+            initRemoteDriver();
+        }else{
         driver = new ChromeDriver();
         System.setProperty("webdriver.chromedriver.driver", "src/test/resources/chromedriver.exe");
         driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-        driver.get(URL);
+        driver.get(URL_LOCAL);}
+
         PageFactory.initElements(driver, this);
     }
 
-//    @Test
-//    public void test(){
-//        System.out.println(System.getProperty("type.driver"));
-//    }
-
 
     private void initRemoteDriver(){
-        System.out.println("bybn");
+        DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+        desiredCapabilities.setBrowserName(propertyMap.get("type.browser"));
+        desiredCapabilities.setVersion(propertyMap.get("type.version"));
+        desiredCapabilities.setCapability("selenoid:options",
+                Map.<String,Object>of("enableVNC", true));
+
+//        desiredCapabilities.setCapability("enableVideo", false);
+
+        try {
+            driver = new RemoteWebDriver(URI.create("http://149.154.71.152:4444/wd/hub").toURL(),desiredCapabilities);
+//            driver = new RemoteWebDriver(URI.create(propertyMap.get("selenoid.url")).toURL(),desiredCapabilities);
+//
+            driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+            driver.manage().window().maximize();
+            driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+            driver.get("http://149.154.71.152:8080/food");
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
+
 
     }
 

@@ -1,19 +1,37 @@
 package org.ibs;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
+
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
 
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
+//            FileInputStream propertyFile;
+//            Properties property = new Properties();
+//
+//            try {
+//                propertyFile = new FileInputStream("src/test/resources/application.properties");
+//            } catch (FileNotFoundException e) {
+//                throw new RuntimeException(e);
+//            }
+//            try {
+//                property.load(propertyFile);
+//            } catch (IOException e) {
+//                throw new RuntimeException(e);
+//            }
+//
+//            String browser = property.getProperty("type.browser");
+//            String driver = property.getProperty("app.type.driver");
+//            String selenoidUrl = property.getProperty("app.selenoid.url");
+//
+//            System.out.println("HOST: " + browser
+//                    + ", LOGIN: " + driver
+//                    + ", PASSWORD: " + selenoidUrl);
 
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
-        }
+
     }
 }

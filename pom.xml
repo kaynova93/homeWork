@@ -89,6 +89,12 @@
             <version>2.24.0</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.apache.maven.resolver</groupId>
+            <artifactId>maven-resolver-api</artifactId>
+            <version>1.6.3</version>
+            <scope>test</scope>
+        </dependency>
 
     </dependencies>
 
