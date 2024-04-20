@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -157,6 +158,8 @@ public class PageObject {
                 "enableVNC", true
 //                "enableVideo", false
         ));
+        ChromeOptions options = new ChromeOptions();
+        options.setCapability("enableVNC", true);
         LoggingPreferences logPrefs = new LoggingPreferences();
         logPrefs.enable(LogType.BROWSER, Level.ALL);
         desiredCapabilities.setCapability(LOGGING_PREFS, logPrefs);
