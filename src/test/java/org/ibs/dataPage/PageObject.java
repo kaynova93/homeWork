@@ -128,10 +128,10 @@ public class PageObject {
     private void initRemoteDriver(){
 
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-        desiredCapabilities.setCapability ("browserName", System.getProperty ("type.browser"));
-        desiredCapabilities.setCapability ("browserVersion", System.getProperty ("type.version"));
-//        desiredCapabilities.setBrowserName(System.getProperty("type.browser"));
-//        desiredCapabilities.setVersion(System.getProperty("type.version"));
+//        desiredCapabilities.setCapability ("browserName", System.getProperty ("type.browser"));
+//        desiredCapabilities.setCapability ("browserVersion", System.getProperty ("type.version"));
+        desiredCapabilities.setBrowserName(System.getProperty("type.browser"));
+        desiredCapabilities.setVersion(System.getProperty("type.version"));
         desiredCapabilities.setCapability("selenoid:options", Map.<String, Object>of(
                 "enableVNC", true,
                 "enableVideo", false
