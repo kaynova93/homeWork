@@ -28,8 +28,11 @@ public class PageObject {
     private static final String URL_LOCAL = "http://localhost:8080/food";
     private static final String URL = "http://149.154.71.152:8080/food";
     public static WebDriver driver;
-
     public static String remote;
+
+    public static String name = System.getProperty(System.getProperty ("type.browser"));
+    public static String version = System.getProperty ("type.version");
+
 
 
     @FindBy(xpath = "//button[@data-target = '#editModal']")
@@ -146,8 +149,10 @@ public class PageObject {
     private void initRemoteDriver(){
 
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-        desiredCapabilities.setCapability ("browserName", System.getProperty ("type.browser"));
-        desiredCapabilities.setCapability ("browserVersion", System.getProperty ("type.version"));
+        desiredCapabilities.setCapability ("browserName", name);
+        desiredCapabilities.setCapability ("browserVersion", version);
+//        desiredCapabilities.setCapability ("browserName", System.getProperty ("type.browser"));
+//        desiredCapabilities.setCapability ("browserVersion", System.getProperty ("type.version"));
         desiredCapabilities.setCapability("selenoid:options", Map.<String, Object>of(
                 "enableVNC", true
 //                "enableVideo", false
