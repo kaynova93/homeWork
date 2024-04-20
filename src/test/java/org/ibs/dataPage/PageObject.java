@@ -122,10 +122,11 @@ public class PageObject {
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
         desiredCapabilities.setCapability ("browserName", System.getProperty("type.browser"));
         desiredCapabilities.setCapability ("browserVersion", System.getProperty("type.version"));
-        desiredCapabilities.setCapability("selenoid:options", Map.<String, Object>of(
-                "enableVNC", false,
-                "enableVideo", false
-        ));
+//        desiredCapabilities.setCapability("selenoid:options", Map.<String, Object>of(
+//                "enableVNC", true,
+//                "enableVideo", false
+//        ));
+        capabilities.setCapability("selenoid:options", Map.<String, Object>of("enableVNC", true));
         try {
             driver = new RemoteWebDriver(URI.create(PropManedger.propertyMap.get("selenoid.url")).toURL(),desiredCapabilities);
             driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
