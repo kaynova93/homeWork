@@ -5,9 +5,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.logging.LogType;
-import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.CacheLookup;
@@ -25,9 +22,6 @@ public class PageObject {
     private static final String URL_LOCAL = "http://localhost:8080/food";
     private static final String URL = "http://149.154.71.152:8080/food";
     public static WebDriver driver;
-
-    private String name = System.getProperty("type.browser");
-    private String version = System.getProperty("type.version");
 
     @FindBy(xpath = "//button[@data-target = '#editModal']")
     @CacheLookup
@@ -126,10 +120,10 @@ public class PageObject {
     private void initRemoteDriver(){
 
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-        desiredCapabilities.setCapability ("browserName", name);
-        desiredCapabilities.setCapability ("browserVersion", version);
+        desiredCapabilities.setCapability ("browserName", System.getProperty("type.browser"));
+        desiredCapabilities.setCapability ("browserVersion", System.getProperty("type.version"));
         desiredCapabilities.setCapability("selenoid:options", Map.<String, Object>of(
-                "enableVNC", true,
+                "enableVNC", false,
                 "enableVideo", false
         ));
         try {
