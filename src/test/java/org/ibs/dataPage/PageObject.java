@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.CacheLookup;
@@ -15,7 +17,10 @@ import java.net.URI;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 import java.util.stream.Collectors;
+
+import static org.openqa.selenium.chrome.ChromeOptions.LOGGING_PREFS;
 
 public class PageObject {
 
@@ -145,8 +150,11 @@ public class PageObject {
         desiredCapabilities.setCapability ("browserVersion", System.getProperty ("type.version"));
         desiredCapabilities.setCapability("selenoid:options", Map.<String, Object>of(
                 "enableVNC", true,
-                "enableVideo", false
+                "enableVideo", true
         ));
+        LoggingPreferences logPrefs = new LoggingPreferences();
+        logPrefs.enable(LogType.BROWSER, Level.ALL);
+        desiredCapabilities.setCapability(LOGGING_PREFS, logPrefs);
         try {
             driver = new RemoteWebDriver(URI.create(PropManedger.propertyMap.get("selenoid.url")).toURL(),desiredCapabilities);
             driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
