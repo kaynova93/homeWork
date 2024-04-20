@@ -119,8 +119,8 @@ public class PageObject {
 
 
     public void init() {
-        if(driver==null) {
-            remote = System.getProperty("app.type.driver");
+//        if(driver==null) {
+//            remote = System.getProperty("app.type.driver");
             if (!String.valueOf(System.getProperty("app.type.driver")).equals("null")) {
                 if (System.getProperty("app.type.driver").equalsIgnoreCase("remote")) {
                     initRemoteDriver();
@@ -134,12 +134,12 @@ public class PageObject {
                 driver.get(URL_LOCAL);
             }
             PageFactory.initElements(driver, this);
-        }else{
-            if(!String.valueOf(System.getProperty("app.type.driver")).equals("null")) {
-                driver.get(URL);
-            }else {
-                driver.get(URL_LOCAL);
-            }
+//        }else{
+//            if(!String.valueOf(System.getProperty("app.type.driver")).equals("null")) {
+//                driver.get(URL);
+//            }else {
+//                driver.get(URL_LOCAL);
+//            }
             PageFactory.initElements(driver, this);
         }
 
