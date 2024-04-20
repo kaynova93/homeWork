@@ -143,7 +143,7 @@ public class PageObject {
             PageFactory.initElements(driver, this);
         }
 
-    }
+//    }
 
 
     private void initRemoteDriver(){
