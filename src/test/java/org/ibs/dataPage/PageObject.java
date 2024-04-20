@@ -132,6 +132,7 @@ public class PageObject {
             }else {
                 driver.get(URL);
             }
+            PageFactory.initElements(driver, this);
         }
 
     }
