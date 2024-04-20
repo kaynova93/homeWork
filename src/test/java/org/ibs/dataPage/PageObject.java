@@ -19,8 +19,8 @@ import java.util.stream.Collectors;
 
 public class PageObject {
 
-    private static final String URL_LOCAL = "http://localhost:8080/food";
-    private static final String URL = "http://149.154.71.152:8080/food";
+    private static final String URL_LOCAL = PropManedger.propertyMap.get("local.url");
+    private static final String URL = PropManedger.propertyMap.get("url");
     public static WebDriver driver;
 
 
