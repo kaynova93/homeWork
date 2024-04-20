@@ -30,8 +30,8 @@ public class PageObject {
     public static WebDriver driver;
     public static String remote;
 
-    public static String name = System.getProperty(System.getProperty ("type.browser"));
-    public static String version = System.getProperty ("type.version");
+//    public static String name = System.getProperty(System.getProperty ("type.browser"));
+//    public static String version = System.getProperty ("type.version");
 
 
 
@@ -149,8 +149,8 @@ public class PageObject {
     private void initRemoteDriver(){
 
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-        desiredCapabilities.setCapability ("browserName", name);
-        desiredCapabilities.setCapability ("browserVersion", version);
+        desiredCapabilities.setCapability ("browserName", System.getProperty ("type.browser"));
+        desiredCapabilities.setCapability ("browserVersion", System.getProperty ("type.version"));
 //        desiredCapabilities.setCapability ("browserName", System.getProperty ("type.browser"));
 //        desiredCapabilities.setCapability ("browserVersion", System.getProperty ("type.version"));
         desiredCapabilities.setCapability("selenoid:options", Map.<String, Object>of(
