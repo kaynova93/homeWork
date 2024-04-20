@@ -149,7 +149,7 @@ public class PageObject {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        driver.close();
+        driver.quit();
     }
 
     public WebElement getType(String type) {
