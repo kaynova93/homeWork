@@ -128,8 +128,7 @@ public class PageObject {
         ));
 
         try {
-//            driver = new RemoteWebDriver(URI.create(PropManedger.propertyMap.get("selenoid.url")).toURL(),desiredCapabilities);
-            driver = new RemoteWebDriver(URI.create(PropManedger.propertyMap.get("http://149.154.71.152:4444")).toURL(),desiredCapabilities);
+            driver = new RemoteWebDriver(URI.create(PropManedger.propertyMap.get("selenoid.url")).toURL(),desiredCapabilities);
             driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
             driver.manage().window().maximize();
             driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
