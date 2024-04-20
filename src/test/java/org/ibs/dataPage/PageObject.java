@@ -19,8 +19,8 @@ import java.util.stream.Collectors;
 
 public class PageObject {
 
-    private static final String URL_LOCAL = PropManedger.propertyMap.get("local.url");
-    private static final String URL = PropManedger.propertyMap.get("url");
+    private static final String URL_LOCAL = "http://localhost:8080/food";
+    private static final String URL = "http://149.154.71.152:8080/food";
     public static WebDriver driver;
 
 
@@ -130,7 +130,8 @@ public class PageObject {
         desiredCapabilities.setBrowserName(System.getProperty("app.type.browser"));
         desiredCapabilities.setVersion(System.getProperty("app.type.version"));
         desiredCapabilities.setCapability("selenoid:options",
-                Map.<String,Object>of("enableVNC", true
+                Map.<String,Object>of("enableVNC", true,
+                        "enableVideo", false
                 ));
         try {
             driver = new RemoteWebDriver(URI.create(PropManedger.propertyMap.get("selenoid.url")).toURL(),desiredCapabilities);
