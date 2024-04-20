@@ -133,9 +133,9 @@ public class PageObject {
             PageFactory.initElements(driver, this);
         }else{
             if(!String.valueOf(System.getProperty("app.type.driver")).equals("null")) {
-                driver.get(URL_LOCAL);
-            }else {
                 driver.get(URL);
+            }else {
+                driver.get(URL_LOCAL);
             }
             PageFactory.initElements(driver, this);
         }
