@@ -18,9 +18,14 @@ public class UiStepsAddProduct {
         pageObject.init();
     }
 
-    @И("Закрыть подключение для UI")
+    @И("Закрыть браузер")
     public void close() {
         pageObject.close();
+    }
+
+    @И("Закрыть подключение для UI")
+    public void quit() {
+        pageObject.quit();
     }
 
     @Когда("Кнопка добавить видна")

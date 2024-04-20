@@ -126,9 +126,10 @@ public class PageObject {
 
 
     private void initRemoteDriver(){
+
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-        desiredCapabilities.setCapability ("browserName", System.getProperty("type.browser"));
-        desiredCapabilities.setCapability ("browserVersion", System.getProperty("type.version"));
+        desiredCapabilities.setCapability ("browserName", System.getProperty ("type.browser"));
+        desiredCapabilities.setCapability ("browserVersion", System.getProperty ("type.version"));
 //        desiredCapabilities.setBrowserName(System.getProperty("type.browser"));
 //        desiredCapabilities.setVersion(System.getProperty("type.version"));
         desiredCapabilities.setCapability("selenoid:options", Map.<String, Object>of(
@@ -147,6 +148,15 @@ public class PageObject {
     }
 
     public void close() {
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        driver.close();
+    }
+
+    public void quit() {
         try {
             Thread.sleep(100);
         } catch (InterruptedException e) {
