@@ -31,11 +31,6 @@ public class PageObject {
     public static WebDriver driver;
     public static String remote;
 
-//    public static String name = System.getProperty(System.getProperty ("type.browser"));
-//    public static String version = System.getProperty ("type.version");
-
-
-
     @FindBy(xpath = "//button[@data-target = '#editModal']")
     @CacheLookup
     private WebElement btnAdd;
@@ -152,22 +147,15 @@ public class PageObject {
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
         desiredCapabilities.setCapability ("browserName", System.getProperty ("type.browser"));
         desiredCapabilities.setCapability ("browserVersion", System.getProperty ("type.version"));
-//        desiredCapabilities.setCapability ("browserName", System.getProperty ("type.browser"));
-//        desiredCapabilities.setCapability ("browserVersion", System.getProperty ("type.version"));
         desiredCapabilities.setCapability("selenoid:options", Map.<String, Object>of(
-                "enableVNC", true
-//                "enableVideo", false
+                "enableVNC", true,
+                "enableVideo", false
         ));
-        ChromeOptions options = new ChromeOptions();
-        options.setCapability("enableVNC", true);
-        LoggingPreferences logPrefs = new LoggingPreferences();
-        logPrefs.enable(LogType.BROWSER, Level.ALL);
-        desiredCapabilities.setCapability(LOGGING_PREFS, logPrefs);
         try {
             driver = new RemoteWebDriver(URI.create(PropManedger.propertyMap.get("selenoid.url")).toURL(),desiredCapabilities);
-            driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+//            driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
             driver.manage().window().maximize();
-            driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+//            driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
             driver.get(URL);
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
