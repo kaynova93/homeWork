@@ -149,8 +149,8 @@ public class PageObject {
         desiredCapabilities.setCapability ("browserName", System.getProperty ("type.browser"));
         desiredCapabilities.setCapability ("browserVersion", System.getProperty ("type.version"));
         desiredCapabilities.setCapability("selenoid:options", Map.<String, Object>of(
-                "enableVNC", true,
-                "enableVideo", true
+                "enableVNC", true
+//                "enableVideo", false
         ));
         LoggingPreferences logPrefs = new LoggingPreferences();
         logPrefs.enable(LogType.BROWSER, Level.ALL);
