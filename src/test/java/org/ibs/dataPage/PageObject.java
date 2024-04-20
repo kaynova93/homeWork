@@ -18,24 +18,17 @@ import java.net.URI;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
 import java.util.stream.Collectors;
 
-import static org.openqa.selenium.chrome.ChromeOptions.LOGGING_PREFS;
-
 public class PageObject {
-
 
     private static final String URL_LOCAL = "http://localhost:8080/food";
     private static final String URL = "http://149.154.71.152:8080/food";
     public static WebDriver driver;
-    public static String remote;
 
     @FindBy(xpath = "//button[@data-target = '#editModal']")
     @CacheLookup
     private WebElement btnAdd;
-
-
     @FindBy(xpath = "//select")
     @CacheLookup
     private WebElement fieldType;
@@ -51,21 +44,16 @@ public class PageObject {
     @FindBy(id = "save")
     @CacheLookup
     private WebElement btnSave;
-
     @FindBy(xpath = "//input[@class='form-control']")
     @CacheLookup
     private WebElement inputFieldName;
-
     @FindBy(id = "exotic")
     @CacheLookup
     private WebElement checkboxExotic;
-
     @FindBy(xpath = "//label[.='Наименование']")
     private WebElement titleFieldName;
-
     @FindBy(xpath = "//label[.='Тип']")
     private WebElement titleFieldType;
-
     @FindBy(xpath = "//label[.='Экзотический']")
     private WebElement titleFieldExotic;
 
@@ -115,8 +103,6 @@ public class PageObject {
 
 
     public void init() {
-//        if(driver==null) {
-//            remote = System.getProperty("app.type.driver");
             if (!String.valueOf(System.getProperty("app.type.driver")).equals("null")) {
                 if (System.getProperty("app.type.driver").equalsIgnoreCase("remote")) {
                     initRemoteDriver();
@@ -130,16 +116,8 @@ public class PageObject {
                 driver.get(URL_LOCAL);
             }
             PageFactory.initElements(driver, this);
-//        }else{
-//            if(!String.valueOf(System.getProperty("app.type.driver")).equals("null")) {
-//                driver.get(URL);
-//            }else {
-//                driver.get(URL_LOCAL);
-//            }
-            PageFactory.initElements(driver, this);
         }
 
-//    }
 
 
     private void initRemoteDriver(){
@@ -153,9 +131,9 @@ public class PageObject {
         ));
         try {
             driver = new RemoteWebDriver(URI.create(PropManedger.propertyMap.get("selenoid.url")).toURL(),desiredCapabilities);
-//            driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+            driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
             driver.manage().window().maximize();
-//            driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+            driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
             driver.get(URL);
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
