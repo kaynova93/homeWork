@@ -24,6 +24,8 @@ public class PageObject {
     private static final String URL = "http://149.154.71.152:8080/food";
     public static WebDriver driver;
 
+    public static String remote;
+
 
     @FindBy(xpath = "//button[@data-target = '#editModal']")
     @CacheLookup
@@ -109,10 +111,12 @@ public class PageObject {
 
 
     public void init() {
-        System.out.println(System.getProperty("app.type.driver"));
-        if (!String.valueOf(System.getProperty("app.type.driver")).equals("null")) {
-            if (System.getProperty("app.type.driver").equalsIgnoreCase("remote")) {
-                initRemoteDriver();}
+        if(driver==null) {
+            remote = System.getProperty("app.type.driver");
+            if (!String.valueOf(System.getProperty("app.type.driver")).equals("null")) {
+                if (System.getProperty("app.type.driver").equalsIgnoreCase("remote")) {
+                    initRemoteDriver();
+                }
             } else {
                 driver = new ChromeDriver();
                 System.setProperty("webdriver.chromedriver.driver", "src/test/resources/chromedriver.exe");
@@ -122,6 +126,13 @@ public class PageObject {
                 driver.get(URL_LOCAL);
             }
             PageFactory.initElements(driver, this);
+        }else{
+            if(!String.valueOf(System.getProperty("app.type.driver")).equals("null")) {
+                driver.get(URL_LOCAL);
+            }else {
+                driver.get(URL);
+            }
+        }
 
     }
 
