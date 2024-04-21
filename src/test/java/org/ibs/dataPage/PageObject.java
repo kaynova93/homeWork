@@ -115,13 +115,11 @@ public class PageObject {
             PageFactory.initElements(driver, this);
         }
 
-
-
     private void initRemoteDriver(){
 
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-        desiredCapabilities.setCapability ("browserName", System.getProperty("type.browser"));
-        desiredCapabilities.setCapability ("browserVersion", System.getProperty("type.version"));
+        desiredCapabilities.setCapability("browserName", System.getProperty("type.browser"));
+        desiredCapabilities.setCapability("browserVersion", System.getProperty("type.version"));
         desiredCapabilities.setCapability("selenoid:options", Map.<String, Object>of(
                 "enableVNC", true,
                 "enableLog", true,
@@ -130,9 +128,7 @@ public class PageObject {
 
         try {
             driver = new RemoteWebDriver(URI.create(PropManedger.propertyMap.get("selenoid.url")).toURL(),desiredCapabilities);
-//            driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
             driver.manage().window().maximize();
-//            driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
             driver.get(URL);
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
