@@ -34,8 +34,8 @@ public class DriverManadger {
 
     private static WebDriver initRemoteDriver(){
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("browserName", "chrome");
-        capabilities.setCapability("browserVersion", "108.0");
+        capabilities.setCapability("browserName", System.getProperty("type.browser"));
+        capabilities.setCapability("browserVersion", System.getProperty("type.version"));
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
                 "enableVNC", true,
                 "enableVideo", false
