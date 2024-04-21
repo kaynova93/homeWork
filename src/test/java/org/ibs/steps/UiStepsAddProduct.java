@@ -18,7 +18,7 @@ public class UiStepsAddProduct {
             pageObject.init();
     }
 
-    @И("Закрыть браузер")
+    @И("Закрыть подключение UI")
     public void close() {
         pageObject.closeDriver();
     }

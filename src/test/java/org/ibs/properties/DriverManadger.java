@@ -55,6 +55,11 @@ public class DriverManadger {
     }
 
     public static void closeDriver() {
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         driver.manage().deleteAllCookies();
         driver.quit();
         driver = null;
