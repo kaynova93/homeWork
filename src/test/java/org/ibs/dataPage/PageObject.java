@@ -131,9 +131,9 @@ public class PageObject {
 
         try {
             driver = new RemoteWebDriver(URI.create(PropManedger.propertyMap.get("selenoid.url")).toURL(),desiredCapabilities);
-            driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+//            driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
             driver.manage().window().maximize();
-            driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+//            driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
             driver.get(URL);
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
