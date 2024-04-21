@@ -6,26 +6,21 @@ import io.qameta.allure.Issue;
 import org.ibs.dataPage.PageObject;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebElement;
-
 import java.util.List;
 
 @Issue("Kaynova I.S.")
 public class UiStepsAddProduct {
+
     PageObject pageObject = new PageObject();
 
     @И("Подключить настройки для UI")
     public void init() {
-        pageObject.init();
+            pageObject.init();
     }
 
     @И("Закрыть браузер")
     public void close() {
-        pageObject.close();
-    }
-
-    @И("Закрыть подключение для UI")
-    public void quit() {
-        pageObject.quit();
+        pageObject.closeDriver();
     }
 
     @Когда("Кнопка добавить видна")

@@ -1,27 +1,20 @@
 package org.ibs.dataPage;
 
-import org.ibs.properties.PropManedger;
+import org.ibs.properties.DriverManadger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import java.net.MalformedURLException;
-import java.net.URI;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-public class PageObject {
 
-    private static final String URL_LOCAL = "http://localhost:8080/food";
-    private static final String URL = "http://149.154.71.152:8080/food";
-    public static WebDriver driver;
+
+import static org.ibs.properties.DriverManadger.*;
+
+
+public class PageObject {
 
     @FindBy(xpath = "//button[@data-target = '#editModal']")
     @CacheLookup
@@ -98,59 +91,13 @@ public class PageObject {
         return inputFieldName;
     }
 
-
     public void init() {
-            if (!String.valueOf(System.getProperty("app.type.driver")).equals("null")) {
-                if (System.getProperty("app.type.driver").equalsIgnoreCase("remote")) {
-                    initRemoteDriver();
-                }
-            } else {
-                driver = new ChromeDriver();
-                System.setProperty("webdriver.chromedriver.driver", "src/test/resources/chromedriver.exe");
-                driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-                driver.manage().window().maximize();
-                driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-                driver.get(URL_LOCAL);
-            }
-            PageFactory.initElements(driver, this);
-        }
-
-    private void initRemoteDriver(){
-
-        DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-        desiredCapabilities.setCapability("browserName", System.getProperty("type.browser"));
-        desiredCapabilities.setCapability("browserVersion", System.getProperty("type.version"));
-        desiredCapabilities.setCapability("selenoid:options", Map.<String, Object>of(
-                "enableVNC", true,
-                "enableLog", true,
-                "enableVideo", false
-        ));
-
-        try {
-            driver = new RemoteWebDriver(URI.create(PropManedger.propertyMap.get("selenoid.url")).toURL(),desiredCapabilities);
-            driver.manage().window().maximize();
-            driver.get(URL);
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        }
+        DriverManadger.init();
+         PageFactory.initElements(driver, this);
     }
 
-    public void close() {
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        driver.close();
-    }
-
-    public void quit() {
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        driver.quit();
+    public void closeDriver() {
+        DriverManadger.closeDriver();
     }
 
     public WebElement getType(String type) {
@@ -167,5 +114,8 @@ public class PageObject {
                 findElement(By.tagName("tbody")).
                 findElements(By.cssSelector(" tr:last-child td")).stream().collect(Collectors.toList());
     }
+
+
+
 
 }

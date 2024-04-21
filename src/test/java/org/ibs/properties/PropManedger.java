@@ -21,23 +21,6 @@ public class PropManedger {
         }
     }
 
-//    private String getProp(String propertyName) {
-//        FileInputStream propertyFile;
-//        Properties property = new Properties();
-//
-//        try {
-//            propertyFile = new FileInputStream("src/main/resources/config.properties");
-//        } catch (FileNotFoundException e) {
-//            throw new RuntimeException(e);
-//        }
-//        try {
-//            property.load(propertyFile);
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//        return property.getProperty(propertyName);
-//    }
-
 
 
 }
