@@ -60,7 +60,7 @@ public class DriverManadger {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        driver.manage().deleteAllCookies();
+//        driver.manage().deleteAllCookies();
         driver.quit();
         driver = null;
     }
